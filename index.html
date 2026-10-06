@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111827">
+  <title>Очередь заказов</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="config.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div><div class="eyebrow">MLMLKA · УПРАВЛЕНИЕ</div><h1>Очередь заказов</h1></div>
+      <div class="account"><span id="connection" class="connection">Не подключено</span><span id="accountName"></span><button id="login" class="primary">Войти через Discord</button><button id="logout" class="quiet" hidden>Выйти</button></div>
+    </header>
+    <div id="banner" class="banner" role="status" hidden></div>
+    <section id="signedOut" class="welcome card">
+      <div class="welcome-icon">✈</div><h2>Управляйте заказами с любого устройства</h2>
+      <p>Войдите через Discord. Доступ разрешён только настроенным администраторам.</p>
+      <button id="loginWelcome" class="primary">Войти через Discord</button>
+    </section>
+    <div id="workspace" hidden>
+      <div class="summary-row">
+        <article class="metric card"><span>В очереди</span><strong id="orderCount">—</strong></article>
+        <article class="metric card"><span>Требуют проверки</span><strong id="reviewCount">—</strong></article>
+        <article class="metric card"><span>Обновлено</span><strong id="updatedAt">—</strong></article>
+      </div>
+      <nav class="tabs" aria-label="Разделы"><button class="tab active" data-panel="ordersPanel">Заказы</button><button class="tab" data-panel="donationsPanel">Донаты и проверки</button><button class="tab" data-panel="statusPanel">Подключения</button></nav>
+      <section id="ordersPanel" class="panel card">
+        <div class="section-heading"><div><h2>Заказы</h2><p>А — DonationAlerts, П — DonatePay</p></div><button id="refresh" class="quiet">Обновить</button></div>
+        <form id="addForm" class="add-form"><input id="orderInput" maxlength="4000" placeholder="Самолёт или текст заказа" required><button class="primary">Добавить</button></form>
+        <div class="bulkbar"><label><input type="checkbox" id="selectAll"> Выбрать все</label><span id="selectedCount">Выбрано: 0</span><button id="deleteSelected" class="danger" disabled>Удалить выбранные</button></div>
+        <div class="table-wrap"><table><thead><tr><th></th><th>Источник</th><th>Самолёт / заказ</th><th></th></tr></thead><tbody id="ordersBody"></tbody></table></div>
+        <div id="emptyOrders" class="empty" hidden>Очередь пока пуста.</div>
+      </section>
+      <section id="donationsPanel" class="panel card" hidden><div class="section-heading"><div><h2>Донаты и проверки</h2><p>Последние 100 сообщений. Спорные заказы можно подтвердить вручную.</p></div></div><div id="donationsList" class="donations-list"></div></section>
+      <section id="statusPanel" class="panel card" hidden><div class="section-heading"><div><h2>Подключения</h2><p>Состояние источников донатов на сервере.</p></div></div><div id="providers" class="providers"></div></section>
+    </div>
+    <footer>Заказы синхронизируются с сервером. Страница проверяет обновления каждые 15 секунд.</footer>
+  </main>
+</body>
+</html>
